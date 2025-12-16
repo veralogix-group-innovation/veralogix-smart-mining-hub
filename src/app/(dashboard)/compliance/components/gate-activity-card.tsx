@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { StatusPill, StatusPillStatus } from "@/components/shared/status-pill";
 import { Separator } from "@/components/ui/separator";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer } from "recharts";
+import { BarChart, Bar, CartesianGrid, XAxis, YAxis, ResponsiveContainer } from "recharts";
 import type { ChartConfig } from "@/components/ui/chart";
 
 const gateActivity = [
