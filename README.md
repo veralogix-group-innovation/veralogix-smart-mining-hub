@@ -1,3 +1,5 @@
+<a href="https://freeimage.host/"><img src="https://iili.io/KUXIzXV.png" alt="KUXIzXV.png" border="0" /></a>
+
 # Smart Mining HUB — GitHub Pages Site
 The **Smart Mining HUB** is Veralogix Group’s operational command layer for mining — a single platform that connects **people + machines + plant + transport + risk** into one clear view, with dashboards and workflows designed for real mine conditions (not PowerPoint mines 😅).
 
