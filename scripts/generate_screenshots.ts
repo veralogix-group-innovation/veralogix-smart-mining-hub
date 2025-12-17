@@ -49,7 +49,6 @@ const ROLES = [
 ];
 
 const BASE_URL = 'http://localhost:3000';
-// Changed to screenshots/ to be consistent with user expectation, but we will ensure .gitignore handles it or we manually exclude it
 const OUTPUT_DIR = 'docs/screenshots';
 
 async function main() {
@@ -58,6 +57,16 @@ async function main() {
     const context = await browser.newContext({
         viewport: { width: 1920, height: 1080 }
     });
+
+    // Set sidebar state to expanded via cookie to ensure it's visible
+    await context.addCookies([{
+        name: 'sidebar_state',
+        value: 'true', // 'true' usually means expanded based on boolean logic or 'expanded' depending on implementation.
+                       // The code uses `const [_open, _setOpen] = React.useState(defaultOpen)` and saves boolean.
+        domain: 'localhost',
+        path: '/'
+    }]);
+
     const page = await context.newPage();
 
     for (const role of ROLES) {
@@ -77,12 +86,28 @@ async function main() {
             // Add a small delay to ensure rendering is stable
             await page.waitForTimeout(2000);
 
-            // 1-based index for ordering
-            const filename = `${String(index + 1).padStart(2, '0')}_${pageInfo.name}.png`;
-            const filepath = path.join(roleDir, filename);
+            // Ensure sidebar is visible
+            try {
+                await page.waitForSelector('[data-sidebar="sidebar"]', { state: 'visible', timeout: 5000 });
+            } catch (e) {
+                console.warn('  Sidebar not found or not visible.');
+            }
 
-            await page.screenshot({ path: filepath, fullPage: true });
-            console.log(`  Saved screenshot: ${filepath}`);
+            // 1-based index for ordering
+            const prefix = String(index + 1).padStart(2, '0');
+
+            // Capture Viewport (Side panels visible)
+            const viewportFilename = `${prefix}_${pageInfo.name}_Viewport.png`;
+            const viewportFilepath = path.join(roleDir, viewportFilename);
+            await page.screenshot({ path: viewportFilepath, fullPage: false });
+            console.log(`  Saved viewport screenshot: ${viewportFilepath}`);
+
+            // Capture Full Page (Content focus)
+            const fullFilename = `${prefix}_${pageInfo.name}_Full.png`;
+            const fullFilepath = path.join(roleDir, fullFilename);
+            await page.screenshot({ path: fullFilepath, fullPage: true });
+            console.log(`  Saved fullpage screenshot: ${fullFilepath}`);
+
         } catch (e) {
             console.error(`  Failed to capture ${url}:`, e);
         }
