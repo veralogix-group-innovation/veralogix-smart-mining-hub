@@ -10,8 +10,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['Inter', 'Roboto', 'Segoe UI', 'sans-serif'],
-        headline: ['Inter', 'Roboto', 'Segoe UI', 'sans-serif'],
+        body: ['var(--font-inter)', 'Inter', 'Roboto', 'Segoe UI', 'sans-serif'],
+        headline: ['var(--font-inter)', 'Inter', 'Roboto', 'Segoe UI', 'sans-serif'],
         code: ['monospace'],
       },
       backgroundImage: {

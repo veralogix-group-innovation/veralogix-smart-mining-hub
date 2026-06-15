@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Sidebar,
   SidebarHeader,
@@ -46,7 +47,14 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarHeader className="p-4">
         <Link href="/hub" className="flex justify-center w-48 mx-auto">
-          <img src="/veralogix-logo.png" alt="Veralogix Logo" />
+          <Image
+            src="/veralogix-logo.png"
+            alt="Veralogix Logo"
+            width={2048}
+            height={713}
+            priority
+            className="w-full h-auto"
+          />
         </Link>
       </SidebarHeader>
       <SidebarSeparator />

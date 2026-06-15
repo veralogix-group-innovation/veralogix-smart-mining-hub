@@ -3,6 +3,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -58,10 +59,13 @@ export default function LoginPage() {
     return (
         <>
             <div className="fixed inset-0 w-full h-full -z-10">
-                <img
+                <Image
                     src="/background.png"
                     alt="Background"
-                    className="w-full h-full object-cover"
+                    fill
+                    priority
+                    sizes="100vw"
+                    className="object-cover"
                 />
             </div>
             <main className="relative min-h-screen w-full flex justify-center items-center p-4 sm:p-8">
@@ -69,7 +73,7 @@ export default function LoginPage() {
                     <Card className="w-full bg-[#1E1C1C]/80 backdrop-blur-sm border-[#4A4747] text-white overflow-hidden">
                         <CardContent className="p-6 lg:p-8 flex flex-col">
                              <div className="mx-auto mb-4">
-                                <img src="/veralogix-logo.png" alt="Veralogix Logo" width="240" />
+                                <Image src="/veralogix-logo.png" alt="Veralogix Logo" width={240} height={84} priority />
                             </div>
                             
                             <div className="w-full max-w-md mx-auto">
@@ -114,7 +118,7 @@ export default function LoginPage() {
                     </Card>
                     <div className="mx-auto mt-6 flex items-center justify-center gap-2">
                         <p className="text-sm text-neutral-400">Powered by</p>
-                        <img src="/NeuroLogix V2.png" alt="neuroLogix Logo" className="h-6" />
+                        <Image src="/NeuroLogix V2.png" alt="neuroLogix Logo" width={1000} height={190} className="h-6 w-auto" />
                     </div>
                 </div>
             </main>
