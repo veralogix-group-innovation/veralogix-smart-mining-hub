@@ -11,9 +11,9 @@ There is a single service: the Next.js web app. There is no database, cache, or 
 - Build: `npm run build`; start prod: `npm run start`.
 
 ### Non-obvious caveats
-- `next.config.ts` sets `typescript.ignoreBuildErrors: true` and `eslint.ignoreDuringBuilds: true`, so `npm run build` succeeds even with TS/ESLint errors.
-- `npm run typecheck` (`tsc --noEmit`) currently reports **pre-existing** errors (e.g. missing module `@/ai/flows/smart-hub-morning-brief` imported by `src/app/(dashboard)/hub/components/morning-brief-card.tsx`, and `src/components/ui/calendar.tsx`). These are not environment problems. The `/hub` route depends on the missing flow module; prefer the `/operator`, `/supervisor`, or `/executive` dashboards when smoke-testing.
-- `npm run lint` (`next lint`) is **interactive** and unusable headless: there is no ESLint config, so it prompts to configure ESLint. Lint is effectively not wired up for this repo.
+- `next.config.ts` sets `typescript.ignoreBuildErrors: true` and `eslint.ignoreDuringBuilds: true`, so `npm run build` succeeds even if TS/ESLint errors are (re)introduced — always run `npm run typecheck` and `npm run lint` separately, the build will not catch these.
+- `npm run typecheck` (`tsc --noEmit`) is clean (0 errors).
+- `npm run lint` (`next lint`) is configured via `.eslintrc.json` (`next/core-web-vitals`) and runs non-interactively; it should report no warnings or errors. `next lint` prints a deprecation notice (removed in Next 16) — harmless for now.
 - AI features (natural-language query box, AI shift-handover report) use Google Genkit (`googleai/gemini-2.5-flash`) via Next server actions and require a `GEMINI_API_KEY` (also accepts `GOOGLE_API_KEY`/`GOOGLE_GENAI_API_KEY`) in a git-ignored `.env`. All non-AI dashboards work without it. Optional Genkit dev UI: `npm run genkit:dev` (port ~4000).
 - The `firebase` npm dependency and `.idx/dev.nix` Firebase emulators are unused (no `firebase.json`); safe to ignore.
 - Node 20 is the declared target (`.idx/dev.nix`), but the app runs fine on Node 22.
