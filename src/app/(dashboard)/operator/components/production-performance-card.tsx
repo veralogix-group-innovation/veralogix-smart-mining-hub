@@ -28,7 +28,7 @@ export function ProductionPerformanceCard() {
     return (
         <Card className="card-hover">
             <CardHeader>
-                <CardTitle>Today's Production</CardTitle>
+                <CardTitle>Today&apos;s Production</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
                 <div>
