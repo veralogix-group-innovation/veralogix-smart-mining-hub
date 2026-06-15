@@ -35,13 +35,28 @@ const prompt = ai.definePrompt({
   Also provide a confidence level (0-1) for the suggested route.
 
   Available routes:
-  - /smart-hub
+  - /hub
+  - /operator
+  - /supervisor
+  - /executive
+  - /plant
+  - /fleet
   - /asset-health
   - /dynamic-route-optimization
   - /geofence-breach-prediction
   - /heatmaps
+  - /earthworks
+  - /drones
+  - /twin
+  - /sensors
+  - /network
+  - /safety
+  - /compliance
+  - /reports
   - /shift-handover
   - /fatigue-management
+
+  Always choose a route from the list above. If no route is a good match, return "/hub" with a low confidence value.
 
   User Query: {{{query}}}
 
